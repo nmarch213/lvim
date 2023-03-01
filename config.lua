@@ -1,33 +1,5 @@
---[[
-lvim is the global options object
-
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-
--- general
-lvim.log.level = "warn"
-lvim.format_on_save.enabled = true
-lvim.colorscheme = "dracula"
-vim.opt.relativenumber = true
-vim.opt.guifont = "10"
-
-
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
-
-
--- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-
--- move line up and down
-lvim.keys.normal_mode["<T-j>"] = ":m .+1<CR>=="
-lvim.keys.normal_mode["<T-k>"] = ":m .-2<CR>=="
-
 -- plugins
+-- define the plugins so that the settings below can be used
 lvim.plugins = {
   { "Mofiqul/dracula.nvim" },
   { "zbirenbaum/copilot.lua",
@@ -52,18 +24,32 @@ lvim.plugins = {
   },
 }
 
+-- Copilot settings
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
 table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+-- general
+lvim.log.level = "warn"
+lvim.format_on_save.enabled = true
+lvim.colorscheme = "dracula"
+vim.opt.relativenumber = true
+vim.opt.guifont = "10"
+
+-- keymappings [view all the defaults by pressing <leader>Lk]
+lvim.leader = "space"
+-- save with ctrl+s
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+-- move line up with alt+j
+lvim.keys.normal_mode["<T-j>"] = ":m .+1<CR>=="
+-- move line down with alt+k
+lvim.keys.normal_mode["<T-k>"] = ":m .-2<CR>=="
+
+-- built in lunarvim plugin config
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.view.side = "right"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
-
-
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -79,12 +65,11 @@ lvim.builtin.treesitter.ensure_installed = {
   "java",
   "yaml",
 }
-
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
 
-
+-- setup custom linters/formatters
 local linters = require "lvim.lsp.null-ls.linters"
 
 linters.setup {
