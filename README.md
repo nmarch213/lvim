@@ -1,6 +1,6 @@
 Current LVIM setup
 
-Customer Features
+Custom Features
 ---
 
 - Copilot
